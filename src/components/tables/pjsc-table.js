@@ -1,5 +1,4 @@
 //<====== TABLES ========================================================================================================================>
-    //-> img table
     const PJSCGenerateTable = payload => {   
         let table = '';
         let columns = '';
@@ -61,9 +60,7 @@
     }
 
     //-> columns order by alphabetic order
-    const PJSCOrderTableColumns = (th,rerendertableCallback = () => {}) => {
-        
-        
+    const PJSCOrderTableColumns = (th,appendRowEventListener = () => {},rerendertableCallback = () => {}) => {
         let table = th.parentNode.parentNode.parentNode;
         let tableRowsInfo = [];
         let sortedRowCol = [];
@@ -102,6 +99,8 @@
             rerendertableCallback();
             localStorage.setItem('pjsc-rerendertable-order-table-column','false');
         }else if(localStorage.getItem('pjsc-rerendertable-order-table-column') == 'false'){
+            console.log(appendRowEventListener)
+            appendRowEventListener();
             localStorage.setItem('pjsc-rerendertable-order-table-column','true');
         }
     }
@@ -116,26 +115,15 @@
         }catch(e){
             console.error(e);
         }
-        
-        //Try to get container.dataset.simpleComponentTableType, if not found or have a unknown value, throw error
-        try{
-            if(container.dataset.pjscTableType == 'img-table'){
-                container.innerHTML = PJSCGenerateTable(payload);
-            }  
-            else if(!container.hasAttribute('data-pjsc-table-type')){
-                throw 'Error to get dataset.pjscTableType, define data-pjsc-table-type attr to element, values accepted [img-table,basic-table] 😨';
-            }else{
-                throw 'Unknown data-pjsc-table-type attr value, values accepted [img-table,basic-table] 😵';
-            }
-            
-            //append event list to trigger a function when click on a row
-            appendRowEventListener();
+        //Append table to container
+        container.innerHTML = PJSCGenerateTable(payload);
 
-            //append event list to trigger a sort by thead (detect if user wants to trigger reorder of table by a certain column name)
-            Object.values(container.children[0].children[0].children[0].children).map(tr => tr.addEventListener('click',function(){ PJSCOrderTableColumns(this,() => PJSCAppendTableToContainer(containerId,payload,() => appendRowEventListener()))}));
-        }catch(e){
-            console.error(e);
-        }
+        //Append event list to trigger a function when click on a row (event listener for each table row)
+        appendRowEventListener();
+
+        //Append event list to trigger a sort by thead (detect if user wants to trigger reorder of table by a certain column name)
+        Object.values(container.children[0].children[0].children[0].children).map(tr => {tr.style.cursor = 'pointer'; tr.addEventListener('click',function(){ PJSCOrderTableColumns(this,appendRowEventListener,PJSCAppendTableToContainer(containerId,payload,appendRowEventListener))}) });
+    
         console.log('Table been appended successfully 🚀');
     }
 
@@ -197,6 +185,7 @@
             Object.values(pjsElementIterator.element.childNodes).map((element,pos) => {
                 if(pos % 2 == 0){
                     element.addEventListener(eventListenerType,() => executeFunction());
+                    element.style.cursor = 'pointer';
                 }
             });
         }
