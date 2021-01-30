@@ -14,8 +14,10 @@
                                                         return `<td class="d-flex align-items-center border-top-0"><img class="profile-img img-sm img-rounded mr-2" src="${row[camp.jsonKey[0]]}"></td>`;
                                                     }else if(camp.type == 'tags') {
                                                         return `<td>${row[camp.jsonKey].map(tag => {return `<label class="badge badge-${tag.color} mx-1">${tag.name}</label>`;}).join(' ')}</td>`;
+                                                    }else if(camp.type == 'array'){
+                                                        return `<td>${camp.jsonKey.map(index => row[index].join(camp.joinBy)).join('')}</td>`;
                                                     }else{
-                                                        return `<td>${camp.jsonKey.map(index => row[index]).join('')}</td>`;
+                                                        return `<td>${row[camp.jsonKey]}</td>`
                                                     }
                                                 }).join('')
                                             }<tr>`
@@ -60,14 +62,16 @@
     }
 
     //-> columns order by alphabetic order
-    const PJSCOrderTableColumns = (th,appendRowEventListener = () => {},rerendertableCallback = () => {}) => {
+    const PJSCOrderTableColumns = (th,rerendertableCallback = () => {}) => {
         let table = th.parentNode.parentNode.parentNode;
         let tableRowsInfo = [];
         let sortedRowCol = [];
+
+        
         //Generate rows content
         Object.values(table.rows).map((row,pos) => {
             if(pos % 2 != 0){
-                tableRowsInfo.push({element:row.innerHTML,content:Object.values(row.children).map(td => {return td.innerHTML.replace(/<(.|\n)*?>/g, '')})});
+                tableRowsInfo.push({element:row,content:Object.values(row.children).map(td => {return td.innerHTML.replace(/<(.|\n)*?>/g, '')})});
             }
         });
 
@@ -88,19 +92,22 @@
             }
             return 0;
         });
-        //Rearrange table rows (sort table)
-        table.children[1].innerHTML = ''; sortedRowCol.map(ele => {table.children[1].innerHTML+=tableRowsInfo[ele.pos].element});
         
+
+        //Rearrange table rows (sort table)
+        table.children[1].innerHTML = ''; sortedRowCol.map(ele => {
+            table.children[1].appendChild(tableRowsInfo[ele.pos].element)
+        });
+    
         if(localStorage.getItem('pjsc-rerendertable-order-table-column') == undefined){
             localStorage.setItem('pjsc-rerendertable-order-table-column','true');
         }
         
         if(localStorage.getItem('pjsc-rerendertable-order-table-column') == 'true'){
+            //Re render table with the original data and order (restore table)
             rerendertableCallback();
             localStorage.setItem('pjsc-rerendertable-order-table-column','false');
         }else if(localStorage.getItem('pjsc-rerendertable-order-table-column') == 'false'){
-            console.log(appendRowEventListener)
-            appendRowEventListener();
             localStorage.setItem('pjsc-rerendertable-order-table-column','true');
         }
     }
@@ -118,12 +125,12 @@
         //Append table to container
         container.innerHTML = PJSCGenerateTable(payload);
 
+        //Append event list to trigger a sort by thead (detect if user wants to trigger reorder of table by a certain column name)
+        Object.values(container.children[0].children[0].children[0].children).map(tr => {tr.style.cursor = 'pointer'; tr.addEventListener('click',function(){ PJSCOrderTableColumns(this,() => PJSCAppendTableToContainer(containerId,payload,appendRowEventListener))}) });
+        
         //Append event list to trigger a function when click on a row (event listener for each table row)
         appendRowEventListener();
 
-        //Append event list to trigger a sort by thead (detect if user wants to trigger reorder of table by a certain column name)
-        Object.values(container.children[0].children[0].children[0].children).map(tr => {tr.style.cursor = 'pointer'; tr.addEventListener('click',function(){ PJSCOrderTableColumns(this,appendRowEventListener,PJSCAppendTableToContainer(containerId,payload,appendRowEventListener))}) });
-    
         console.log('[PJSC] Table been appended successfully 🚀');
     }
 
