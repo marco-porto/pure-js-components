@@ -31,7 +31,7 @@
             //Close tag table
             table+= '</table>';
         
-        console.log('Appending table to the component ...');
+        console.log('[PJSC] Appending table to the component ...');
         return table;
     }
 //<====== TABLE FILTERS =============================================================================================================>
@@ -40,8 +40,8 @@
         //Regenerate table
         rerendertableCallback();
         
-        //Convert sampleText to lowercase (prevent)
-        sampleText = sampleText.toLowerCase();
+        //Convert sampleText to lowercase and escape all special char
+        sampleText = sampleText.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
         //Get container element by id and get the first children element (=> table)
         let container = document.querySelector(containerId);
@@ -50,7 +50,7 @@
         //Search sample text on each table row
         if(sampleText.replace(/\s/g, '').length != 0){
             Object.values(tableToFilter.rows).map((row,pos) => {
-                if(pos != 0) if(row.innerHTML != ''){
+                if(pos % 2 != 0){
                     if(row.innerHTML.toLowerCase().search(sampleText) == -1){
                         row.innerHTML = '';
                     }
@@ -124,7 +124,7 @@
         //Append event list to trigger a sort by thead (detect if user wants to trigger reorder of table by a certain column name)
         Object.values(container.children[0].children[0].children[0].children).map(tr => {tr.style.cursor = 'pointer'; tr.addEventListener('click',function(){ PJSCOrderTableColumns(this,appendRowEventListener,PJSCAppendTableToContainer(containerId,payload,appendRowEventListener))}) });
     
-        console.log('Table been appended successfully 🚀');
+        console.log('[PJSC] Table been appended successfully 🚀');
     }
 
 //<===== APPEND EVENT LISTENER =====================================================================================================>
@@ -135,7 +135,7 @@
             if(element == null)
                 throw 'Unknown containerId passed to function PJSCAppendTableToContainer() 😵';
         }catch(e){
-            console.error(e);
+            console.error(`[PJSC] ${e}`);
         }
         //Add event
         element.addEventListener(eventListenerType,function(){
@@ -145,7 +145,7 @@
                     throw 'Error to get dataset.pjscApplyFilterToTableContainerId, define data-pjsc-apply-filter-to-table-container-id attr to element, values accepted [needs to be the table container id]';
                 }
             }catch(e){
-                console.error(e);
+                console.error(`[PJSC] ${e}`);
             }
 
             //Try to get element.dataset.pjscApplyFilterType, if not found or have a unknow value, throw error
@@ -158,14 +158,13 @@
                     throw 'Unknown data-pjsc-apply-filter-type attr value, values accepted [sample-text] 😵';
                 }
             }catch(e){
-                console.error(e);
+                console.error(`[PJSC] ${e}`);
             }
         })
     }
 
     //-> tables
     const PJSCAddEventListenerToTable = (containerId,pathOfChildrenToAppendListener,eventListenerType,executeFunction) => {
-        console.log('CALL ME')
         let container = document.querySelector(containerId);
         //Prevent undefined elementId passed to function
         try{
@@ -173,7 +172,7 @@
                 throw 'Unknown containerId passed to function PJSCAddEventListenerToTable() 😵';
             }
         }catch(e){
-            console.error(e);
+            console.error(`[PJSC] ${e}`);
         }
         //Create element children tree using split method on > char
         let treeChildren = pathOfChildrenToAppendListener.toUpperCase().split('>');

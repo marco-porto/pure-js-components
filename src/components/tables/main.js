@@ -49,7 +49,7 @@ let payloadForTable = {
             "name": "Random name",
             "fileName": "random.jpg",
             "rule": "Administrador",
-            "status": "Ativa",
+            "status": "https://www.youtube.com/watch?v=avLxcVkPgug ",
             "perms": [
               {
                 "name": "Criar",
@@ -69,7 +69,7 @@ let payloadForTable = {
             "name": "Double random name",
             "fileName": "double-random.jpeg",
             "rule": "Administrador",
-            "status": "Ativa",
+            "status": "https://www.youtube.com/watch?v=avLxcKkPgYr ",
             "perms": [
               {
                 "name": "Criar",
