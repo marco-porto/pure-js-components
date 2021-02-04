@@ -1,37 +1,37 @@
 //<====== GENERATE FORECAST COMPONENT ==================================================================================================>
-const PJSCGenForecastComponent = (forecast) => {
+const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
     let forecastComponent = '';
     let forecastImgAnimation = [
         {
-            path:'./icons/storm.gif',
+            path:'storm.gif',
             tags:['heavy rain and thunderstorms','showers and thunderstorms']
         },
         {
-            path:'./icons/sun-clouds.gif',
+            path:'sun-clouds.gif',
             tags:['partly cloudy','sunny intervals']
         },
         {
-            path:'./icons/clouds.gif',
+            path:'clouds.gif',
             tags:['cloudy','cloudy (high cloud)','sunny intervals','partly cloudy','convective clouds']
         },
         {
-            path:'./icons/sun-rain.gif',
+            path:'sun-rain.gif',
             tags:['showers/rain','light showers/rain','heavy showers/rain','rain/showers','light rain','heavy rain/showers','intermittent rain','intermittent ligth rain','intermittent heavy rain','drizzle']
         },
         {
-            path:'./icons/sun-snow.gif',
+            path:'sun-snow.gif',
             tags:['snow','hail','frost','snow showers','rain and snow']
         },
         {
-            path:'./icons/sun.gif',
+            path:'sun.gif',
             tags:['clear sky']
         },
         {
-            path:'./icons/thunder.gif',
+            path:'thunder.gif',
             tags:['thunderstorms']
         },
         {
-            path:'./icons/fog.gif',
+            path:'fog.gif',
             tags:['fog','mist']
         }
     ];
@@ -169,7 +169,7 @@ const PJSCGenForecastComponent = (forecast) => {
             forecast.data.map(day => {
                 forecastComponent +=`<div class="d-flex align-items-center flex-column mt-5 mb-3">
                                         <div class="d-flex flex-column align-items-center h-50">
-                                            <img src="${forecastImgAnimation.map(animation => {
+                                            <img src="${animationsRootDirPath}${forecastImgAnimation.map(animation => {
                                                 if(animation.tags.includes(day.weather.EN.toLowerCase())){
                                                     return animation.path
                                                 }
@@ -262,7 +262,7 @@ const PJSCGenForecastComponent = (forecast) => {
     return forecastComponent;
 }
 
-async function PJSCAppendForecastToContainer(containerId,forecast){
+async function PJSCAppendForecastToContainer(containerId,forecast,animationsRootDirPath){
     //Prevent undefined elementId passed to function
     let container = document.querySelector(containerId);
     try{
@@ -295,7 +295,7 @@ async function PJSCAppendForecastToContainer(containerId,forecast){
             });
             const capsuleApiForecastResponseJson = await (await capsuleApiForecastResponse).json();
             if(capsuleApiForecastResponseJson != undefined){
-                container.innerHTML = PJSCGenForecastComponent({data:capsuleApiForecastResponseJson,local:capsuleApiZoneResponseJson[0].local});
+                container.innerHTML = PJSCGenForecastComponent({data:capsuleApiForecastResponseJson,local:capsuleApiZoneResponseJson[0].local},animationsRootDirPath);
             }
         }
     }
