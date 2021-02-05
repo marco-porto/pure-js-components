@@ -211,7 +211,7 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
                                                                                                     return color;
                                                                                                 }
                                                                                             }).join('')
-                                                                                        }">${data.wind.type != undefined ? day.wind.type.PT : 'Sem informação'}</div>
+                                                                                        }">${day.wind.type != undefined ? day.wind.type.PT : 'Sem informação'}</div>
                                                                 <div class="badge badge-secondary">
                                                                     ${day.wind.direction} -
                                                                     ${forecastCardinalPoints.map(direction => {
