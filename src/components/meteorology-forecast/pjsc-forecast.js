@@ -202,14 +202,16 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
                                                                 <div class="badge badge-${forecastBadges.map(badge => {
                                                                                                 if(badge.type == 'wind'){
                                                                                                     let color = badge.badge.map(badge => {
-                                                                                                        if(badge.tags.includes(day.wind.type.EN.toLowerCase())){
-                                                                                                            return badge.color;
+                                                                                                        if(day.rain.type != undefined){
+                                                                                                            if(badge.tags.includes(day.wind.type.EN.toLowerCase())){
+                                                                                                                return badge.color;
+                                                                                                            }
                                                                                                         }
                                                                                                     }).join('');
                                                                                                     return color;
                                                                                                 }
                                                                                             }).join('')
-                                                                                        }">${day.wind.type.PT}</div>
+                                                                                        }">${data.wind.type != undefined ? day.wind.type.PT : 'Sem informação'}</div>
                                                                 <div class="badge badge-secondary">
                                                                     ${day.wind.direction} -
                                                                     ${forecastCardinalPoints.map(direction => {
@@ -230,14 +232,16 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
                                                                 <div class="badge badge-${forecastBadges.map(badge => {
                                                                                                 if(badge.type == 'rain'){
                                                                                                     let color = badge.badge.map(badge => {
-                                                                                                        if(badge.tags.includes(day.rain.type.EN.toLowerCase())){
-                                                                                                            return badge.color;
+                                                                                                        if(day.rain.type != undefined){
+                                                                                                            if(badge.tags.includes(day.rain.type.EN.toLowerCase())){
+                                                                                                                return badge.color;
+                                                                                                            }
                                                                                                         }
                                                                                                     }).join('');
                                                                                                     return color;
                                                                                                 }
                                                                                             }).join('')
-                                                                                        }">${day.rain.type.PT}</div>
+                                                                                        }">${day.rain.type != undefined ? day.rain.type.PT : 'Sem informação'}</div>
                                                                 <div class="badge badge-${forecastBadges.map(badge => {
                                                                     if(badge.type == 'rain-percentage'){
                                                                         let color = badge.badge.map(badge => {
