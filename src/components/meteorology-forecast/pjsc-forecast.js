@@ -12,7 +12,7 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
         },
         {
             path:'clouds.gif',
-            tags:['cloudy','cloudy (high cloud)','sunny intervals','partly cloudy','convective clouds']
+            tags:['cloudy','cloudy (high cloud)','convective clouds']
         },
         {
             path:'sun-rain.gif',
@@ -171,7 +171,8 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
                                         <div class="d-flex flex-column align-items-center h-50">
                                             <img src="${animationsRootDirPath}${forecastImgAnimation.map(animation => {
                                                 if(animation.tags.includes(day.weather.EN.toLowerCase())){
-                                                    return animation.path
+                                                    return animation.path;
+                                                    
                                                 }
                                             }).join('')}" class="img-fluid h-auto w-50">
                                             <p class="mt-4 text-muted">${day.weather.PT}</p>
