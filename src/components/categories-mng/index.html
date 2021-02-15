@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="../../assets/css/root.css" rel="stylesheet"></link>
+    <title>PJSC - Categories</title>
+</head>
+<body style="background-color:#FBFCFD">
+
+    <div class="row">
+        <!--
+        <div class="col-12 equel-grid">
+            <div class="grid">
+                <div class="grid-body">
+                    <div class="split-header">
+                        <p class="card-title">Criar uma nova categoria/sub categoria de multimédia</p>
+                        <button type="button" class="btn btn-primary">Voltar atrás</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 equel-grid">
+            <div class="grid">
+                <div class="grid-body">
+                    <div class="split-header">
+                        <p class="card-title">Categoria</p>
+                    </div>
+                    <div class="item-wrapper pt-5">
+                        <form  id="multimedia-create-form">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="inputTitle">Nome da categoria</label>
+                                        <span class="btn action-btn btn-xs component-flat float-right" data-toggle="tooltip" data-placement="left" title="Aceita só caracteres de A-Z,números,espaços e (-).">
+                                            <i class="mdi mdi-information-outline text-muted mdi-2x"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="inputTitle">Imagem da categoria</label>
+                                        <span class="btn action-btn btn-xs component-flat float-right" data-toggle="tooltip" data-placement="left" title="Aceita só caracteres de A-Z,números,espaços e (-).">
+                                            <i class="mdi mdi-information-outline text-muted mdi-2x"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <div class="btn-group mb-0 d-flex flex-column" data-toggle="buttons">
+                                            <div> <label>Estado do categoria</label> </div>
+                                            <div>
+                                                <label class="btn btn-outline-primary btn-xs active">
+                                                    <input type="radio" name="status" id="statusPublic" value="public" checked="">
+                                                    <i class="mdi mdi-eye px-2"></i> Público
+                                                </label>
+                                                <label class="btn btn-outline-primary btn-xs">
+                                                    <input type="radio" name="status" value="private" id="statusPrivate">
+                                                    <i class="mdi mdi-eye-off px-2"></i> Privado
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-3">
+                                <p class="small text-danger" id="display-input-error"></p>
+                                <p class="small text-success" id="display-done"></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 equel-grid">
+            <div class="grid">
+                <div class="grid-body">
+                    <div class="split-header">
+                        <p class="card-title">Sub categoria</p>
+                    </div>
+                    <div class="item-wrapper pt-5">
+                        <form  id="multimedia-create-form">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="inputTitle">Nome da sub categoria</label>
+                                        <span class="btn action-btn btn-xs component-flat float-right" data-toggle="tooltip" data-placement="left" title="Aceita só caracteres de A-Z,números,espaços e (-).">
+                                            <i class="mdi mdi-information-outline text-muted mdi-2x"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="inputTitle">Imagem da sub categoria</label>
+                                        <span class="btn action-btn btn-xs component-flat float-right" data-toggle="tooltip" data-placement="left" title="Aceita só caracteres de A-Z,números,espaços e (-).">
+                                            <i class="mdi mdi-information-outline text-muted mdi-2x"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <div class="btn-group mb-0 d-flex flex-column" data-toggle="buttons">
+                                            <div> <label>Estado do sub categoria</label> </div>
+                                            <div>
+                                                <label class="btn btn-outline-primary btn-xs active">
+                                                    <input type="radio" name="status" id="statusPublic" value="public" checked="">
+                                                    <i class="mdi mdi-eye px-2"></i> Público
+                                                </label>
+                                                <label class="btn btn-outline-primary btn-xs">
+                                                    <input type="radio" name="status" value="private" id="statusPrivate">
+                                                    <i class="mdi mdi-eye-off px-2"></i> Privado
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-3">
+                                <p class="small text-danger" id="display-input-error"></p>
+                                <p class="small text-success" id="display-done"></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 equel-grid">
+            <div class="grid p-2">
+                <div class="grid-body py-3">
+                    <input type="text" class="form-control" placeholder="Pesquisar" id="listing-table-categories-filter" data-pjsc-apply-filter-type='sample-text' data-pjsc-apply-filter-to-table-container-id="listing-table-categories-table">
+                </div>
+                <div class="table-responsive" id="listing-table-categories"></div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 equel-grid">
+            <div class="grid p-2">
+                <div class="grid-body py-3">
+                    <input type="text" class="form-control" placeholder="Pesquisar" id="listing-table-sub-categories-filter" data-pjsc-apply-filter-type='sample-text' data-pjsc-apply-filter-to-table-container-id="listing-table-sub-categories-table">
+                </div>
+                <div class="table-responsive" id="listing-table-sub-categories"></div>
+            </div>
+        </div>-->
+
+    </div>
+
+    <script src="../../randomize/pjsc-randomize.js"></script>
+
+    <script src="./pjsc-categories.js"></script>
+    <script src="../../../dist/pjsc-tables.min.js"></script>
+
+    <script src="./main.js"></script>
+</body>
+</html>
