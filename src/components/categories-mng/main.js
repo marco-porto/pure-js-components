@@ -1,6 +1,7 @@
 //Append struct
 
 PJSCAppendCategoryToContainer({
+    container:'#container-form',
     header:{
         title:'Criar uma nova categoria/sub categoria de multimédia',
         button:{
@@ -13,9 +14,17 @@ PJSCAppendCategoryToContainer({
             create:{
                 title:'Categoria',
                 id:'form-multimedia-category-create',
-                submitStatus:{
-                    error:'form-multimedia-category-create-submit-status-error',
-                    success:'form-multimedia-category-create-submit-status-success'
+                submit:{
+                    status:{
+                        error:'form-multimedia-category-create-submit-status-error',
+                        success:'form-multimedia-category-create-submit-status-success'
+                    },
+                    route:'process-create-multimedia-category',
+                    buttons:{
+                        active:'form-multimedia-category-create-submit-active',
+                        loading:'form-multimedia-category-create-submit-loading',
+                        cancel:'form-multimedia-category-create-submit-cancel'
+                    }
                 }
             }
         },
@@ -23,12 +32,40 @@ PJSCAppendCategoryToContainer({
     },
     subCategory:{
         form:{
+            selectCategoriesInput:{
+                container:'#container-select-categories-on-sub-category-form-input',
+                select:{
+                    options:{
+                        normal:[
+                            'Bem-estar',
+                            'Ginástica',
+                            'Karaoke',
+                            'Ouvir música',
+                            'Receitas de culinária',
+                            'Religião',
+                            'Trabalhos manuais'
+                        ]
+                    },
+                    disabled:false,
+                    label:'Categoria',
+                    desc:'Associar uma categoria a este conteúdo',
+                    id:'inputCategories'
+                }
+            },
             create:{
                 title:'Sub categoria',
                 id:'form-multimedia-sub-category-create',
-                submitStatus:{
-                    error:'form-multimedia-sub-category-create-submit-status-error',
-                    success:'form-multimedia-sub-category-create-submit-status-success'
+                submit:{
+                    status:{
+                        error:'form-multimedia-sub-category-create-submit-status-error',
+                        success:'form-multimedia-sub-category-create-submit-status-success'
+                    },
+                    route:'process-create-multimedia-sub-category',
+                    buttons:{
+                        active:'form-multimedia-sub-category-create-submit-active',
+                        loading:'form-multimedia-sub-category-create-submit-loading',
+                        cancel:'form-multimedia-sub-category-create-submit-cancel'
+                    }
                 }
             }
         },
