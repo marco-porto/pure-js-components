@@ -12,7 +12,8 @@ PJSCAppendSelectToContainer({
     container:'#container-select-input',
     select:{
         options:{
-            normal:data
+            normal:data,
+            selected:'Bem-estar'
         },
         disabled:false,
         label:'Categoria',

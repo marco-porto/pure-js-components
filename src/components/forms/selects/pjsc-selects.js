@@ -5,11 +5,18 @@ const PJSCGenerateSelectStruct = props => {
             <span class="btn action-btn btn-xs component-flat float-right" data-toggle="tooltip" data-placement="left" title="${props.desc}">
                 <i class="mdi mdi-information-outline text-muted mdi-2x"></i>
             </span>
-            <select class="custom-select" id="${props.id}" ${props.disabled ? 'disabled' : ''}>
+            <select class="custom-select" name="${props.name}" id="${props.id}" ${props.disabled ? 'disabled' : ''}>
                 ${props.options.selected != undefined ? `<option selected value="${props.options.selected}">${props.options.selected}</option>` : ''}
                 ${
+                    
                     props.options.normal.map(value => {
-                        return `<option value="${value}">${value}</option>`
+                        if(props.options.selected != undefined){
+                            if(props.options.selected != value){
+                                return `<option value="${value}">${value}</option>`
+                            }
+                        }else{
+                            return `<option value="${value}">${value}</option>`
+                        }
                     })
                 }
             </select>`;
