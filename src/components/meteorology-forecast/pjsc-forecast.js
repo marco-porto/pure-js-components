@@ -161,7 +161,7 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
                             <div class="d-flex mt-2">
                                 <div class="wrapper d-flex pr-4">
                                     <small class="text-primary font-weight-medium mr-2">Fonte</small>
-                                    <small class="text-gray">Instituto Português do Mar e da Atmofera (IPMA)</small>
+                                    <small class="text-gray">Instituto Português do Mar e da Atmosfera (IPMA)</small>
                                 </div>
                             </div>`;
         //->Body (Cards) Forecast
