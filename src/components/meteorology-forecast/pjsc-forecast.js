@@ -3,35 +3,35 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
     let forecastComponent = '';
     let forecastImgAnimation = [
         {
-            path:'storm.gif',
+            path:'storm.webm',
             tags:['heavy rain and thunderstorms','showers and thunderstorms']
         },
         {
-            path:'sun-clouds.gif',
+            path:'sun-clouds.webm',
             tags:['partly cloudy','sunny intervals']
         },
         {
-            path:'clouds.gif',
+            path:'clouds.webm',
             tags:['cloudy','cloudy (high cloud)','convective clouds']
         },
         {
-            path:'sun-rain.gif',
+            path:'sun-rain.webm',
             tags:['showers/rain','light showers/rain','heavy showers/rain','rain/showers','light rain','heavy rain/showers','intermittent rain','intermittent ligth rain','intermittent heavy rain','drizzle']
         },
         {
-            path:'sun-snow.gif',
+            path:'sun-snow.webm',
             tags:['snow','hail','frost','snow showers','rain and snow']
         },
         {
-            path:'sun.gif',
+            path:'sun.webm',
             tags:['clear sky']
         },
         {
-            path:'thunder.gif',
+            path:'thunder.webm',
             tags:['thunderstorms']
         },
         {
-            path:'fog.gif',
+            path:'fog.webm',
             tags:['fog','mist']
         }
     ];
@@ -169,12 +169,13 @@ const PJSCGenForecastComponent = (forecast,animationsRootDirPath) => {
             forecast.data.map(day => {
                 forecastComponent +=`<div class="d-flex align-items-center flex-column mt-5 mb-3">
                                         <div class="d-flex flex-column align-items-center h-50">
-                                            <img src="${animationsRootDirPath}${forecastImgAnimation.map(animation => {
-                                                if(animation.tags.includes(day.weather.EN.toLowerCase())){
-                                                    return animation.path;
-                                                    
-                                                }
-                                            }).join('')}" class="img-fluid h-auto w-50">
+                                            <video autoplay loop muted playsinline class="h-auto w-50">  
+                                                <source src="${animationsRootDirPath}${forecastImgAnimation.map(animation => {
+                                                    if(animation.tags.includes(day.weather.EN.toLowerCase())){
+                                                        return animation.path;  
+                                                    }
+                                                }).join('')}" type="video/webm"> 
+                                            </video>  
                                             <p class="mt-4 text-muted">${day.weather.PT}</p>
                                         </div>
                                         <div class="mt-3">
